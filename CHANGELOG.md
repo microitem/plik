@@ -10,10 +10,20 @@ a tento projekt dodržiava [Semantic Versioning](https://semver.org/spec/v2.0.0.
 ## [Unreleased]
 
 ### Plánované
-- GitHub Actions CI/CD workflow
 - Backup automation
 - Rate limiting pre uploads
-- Admin dashboard (voliteľné)
+
+---
+
+## [0.2.0] - 2026-03-05
+
+### Added
+- 🎨 GoodBoog branding: favicon, navbar logo, custom page title
+  - `branding/favicon.svg` + `favicon.ico` — goodboog "g" ikona (modrá #1d63b7)
+  - `branding/logo.svg` — navbar logo "files by goodboog"
+  - `branding/index.html` — titul "GoodBoog Files" + JS injekcia loga do navbaru
+- 📦 Docker volume mounty pre branding adresár (dev + production)
+- 🔄 GitHub Actions workflow update: SCP kopíruje aj `branding/`
 
 ---
 
