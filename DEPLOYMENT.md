@@ -27,11 +27,14 @@
 | ---------------------- | ------------------------------------ |
 | **Domain Names**       | files.goodboog.com                   |
 | **Scheme**             | http                                 |
-| **Forward Hostname/IP**| plik-server (alebo localhost)        |
+| **Forward Hostname/IP**| plik-server (container name!)        |
 | **Forward Port**       | 8080                                 |
 | **Cache Assets**       | ☑ (zaškrtni)                         |
 | **Block Common Exploits**| ☑ (zaškrtni)                       |
 | **Websockets Support** | ☐ (nechaj prázdne)                   |
+
+> **Poznámka:** Používame názov kontajnera `plik-server` (nie `localhost`).
+> NPM a Plik sú v rovnakej Docker sieti `docker_web`, takže Docker DNS rozlíši IP automaticky.
 
 **Krok 3:** Nastav SSL certifikát
 - Prejdi na tab **SSL**

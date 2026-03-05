@@ -1,14 +1,14 @@
 # Plik File Sharing - Production (VPS1)
 # SSOT: /opt/.github/COPILOT-INSTRUCTIONS.md
-# Port: 8080 (internal only, accessed via NPM through docker_web network)
-# External port: 3005 (fallback, not required if NPM uses docker_web)
+# Port: 8080 (internal only, NPM accesses via container name "plik-server" on docker_web network)
+# NPM config: Forward Hostname = plik-server, Forward Port = 8080
 # Domain: https://files.goodboog.com
 
 services:
   plik-server:
     image: rootgg/plik:latest
-    ports:
-      - "3005:8080"
+    expose:
+      - "8080"
     environment:
       - PLIK_SERVER_LISTENADDR=0.0.0.0:8080
       - PLIK_MAX_FILE_SIZE=102400          # 100 MB

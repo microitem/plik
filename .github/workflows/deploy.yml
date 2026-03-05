@@ -78,11 +78,14 @@ jobs:
               exit 1
             fi
 
-            # Internal HTTP test
-            if ! curl -sf http://localhost:3005 > /dev/null; then
-              echo "❌ HTTP health check failed!"
-              docker compose logs --tail=50
-              exit 1
+            # Internal HTTP test (via container name on docker_web network)
+            if ! curl -sf http://plik-server:8080 > /dev/null; then
+              # Fallback: direct check via docker exec
+              if ! docker exec plik-server wget -q --tries=1 --spider http://localhost:8080; then
+                echo "❌ HTTP health check failed!"
+                docker compose logs --tail=50
+                exit 1
+              fi
             fi
 
             echo "✅ Deployment successful"
@@ -107,4 +110,4 @@ jobs:
           echo "Version tag:  ${{ github.ref_name }}"
           echo "Image:        rootgg/plik:latest"
           echo "Production:   https://files.goodboog.com"
-          echo "VPS1 port:    3005 → 8080 (internal)"
+          echo "VPS1 port:    8080 (internal, via docker_web network)"
