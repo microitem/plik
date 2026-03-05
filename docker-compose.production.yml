@@ -1,0 +1,59 @@
+# Plik File Sharing - Production (VPS1)
+# SSOT: /opt/.github/COPILOT-INSTRUCTIONS.md
+# Port: 8080
+# Domain: https://files.goodboog.com
+
+services:
+  plik-server:
+    image: rootgg/plik:latest
+    ports:
+      - "8080:8080"
+    environment:
+      - PLIK_SERVER_LISTENADDR=0.0.0.0:8080
+      - PLIK_MAX_FILE_SIZE=102400          # 100 MB
+      - PLIK_MAX_TTL=2592000               # 30 dní (v sekundách)
+      - PLIK_DATA_DIR=/plik/data
+      - PUBLIC_URL=https://files.goodboog.com
+    env_file:
+      - .env.production
+    restart: unless-stopped
+    container_name: plik-server
+    volumes:
+      - plik_data:/plik/data
+    networks:
+      - web-network
+      - docker_web
+    security_opt:
+      - no-new-privileges:true
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+          cpus: "0.5"
+        reservations:
+          memory: 128M
+          cpus: "0.1"
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "wget",
+          "--quiet",
+          "--tries=1",
+          "--spider",
+          "http://localhost:8080",
+        ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 20s
+
+networks:
+  web-network:
+    driver: bridge
+  docker_web:
+    external: true
+
+volumes:
+  plik_data:
+    driver: local
