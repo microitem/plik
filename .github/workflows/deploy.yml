@@ -18,7 +18,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # 2. Skopíruj docker-compose.production.yml + plikd.cfg na VPS1
+      # 2. Skopíruj docker-compose.production.yml + plikd.cfg + branding na VPS1
       - name: Copy config files to VPS1
         uses: appleboy/scp-action@v0.1.7
         with:
@@ -26,7 +26,7 @@ jobs:
           username: ${{ secrets.VPS1_USER }}
           key: ${{ secrets.VPS1_SSH_KEY }}
           port: ${{ secrets.VPS1_PORT }}
-          source: "docker-compose.production.yml,plikd.cfg"
+          source: "docker-compose.production.yml,plikd.cfg,branding"
           target: "/opt/plik/"
 
       # 3. Deploy na VPS1 cez SSH

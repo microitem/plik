@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="GoodBoog Files - Secure file sharing" />
+  <link rel="icon" type="image/svg+xml" href="/branding/favicon.svg" />
+  <link rel="alternate icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <title>GoodBoog Files</title>
+  <style>
+    /* GoodBoog branding overrides */
+    .gb-logo-img {
+      display: inline-block;
+      height: 32px;
+      width: auto;
+      vertical-align: middle;
+    }
+    /* Hide original Plik text after logo img is injected */
+    .gb-logo-hidden {
+      display: none !important;
+    }
+  </style>
+  <script type="module" crossorigin src="/assets/index-Dgo0uj1h.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-DBx44L2i.css">
+  <script>
+    // GoodBoog branding: replace "Plik" nav text with custom logo
+    (function() {
+      var replaced = false;
+      function injectLogo() {
+        if (replaced) return;
+        // Target: italic tracking-tight elements that show "Plik"
+        var els = document.querySelectorAll('.tracking-tight.italic');
+        els.forEach(function(el) {
+          if (el.textContent.trim() === 'Plik') {
+            var img = document.createElement('img');
+            img.src = '/branding/logo.svg';
+            img.alt = 'GoodBoog Files';
+            img.className = 'gb-logo-img';
+            el.classList.add('gb-logo-hidden');
+            el.parentNode.insertBefore(img, el);
+            replaced = true;
+          }
+        });
+        // Also update document title if Vue overrides it
+        if (document.title === 'Plik') {
+          document.title = 'GoodBoog Files';
+        }
+      }
+      var observer = new MutationObserver(injectLogo);
+      document.addEventListener('DOMContentLoaded', function() {
+        observer.observe(document.body, { childList: true, subtree: true });
+        injectLogo();
+      });
+    })();
+  </script>
+</head>
+
+<body>
+  <div id="app"></div>
+</body>
+
+</html>

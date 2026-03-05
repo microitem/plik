@@ -19,6 +19,9 @@ services:
     volumes:
       - plik_data:/plik/data
       - ./plikd.cfg:/home/plik/server/plikd.cfg:ro
+      - ./branding/index.html:/home/plik/webapp/dist/index.html:ro
+      - ./branding/favicon.ico:/home/plik/webapp/dist/favicon.ico:ro
+      - ./branding:/home/plik/webapp/dist/branding:ro
     networks:
       - web-network
     security_opt:
