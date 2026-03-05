@@ -18,6 +18,7 @@ services:
     container_name: plik-dev
     volumes:
       - plik_data:/plik/data
+      - ./plikd.cfg:/home/plik/server/plikd.cfg:ro
     networks:
       - web-network
     security_opt:

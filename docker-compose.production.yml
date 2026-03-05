@@ -21,6 +21,7 @@ services:
     container_name: plik-server
     volumes:
       - plik_data:/plik/data
+      - ./plikd.cfg:/home/plik/server/plikd.cfg:ro
     networks:
       - web-network
       - docker_web
